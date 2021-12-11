@@ -1,0 +1,22 @@
+import { StaticJsonRpcProvider } from "@ethersproject/providers";
+import { NetworkID } from "src/lib/Bond";
+import { abi as BondCalcContractABI } from "src/abi/BondCalcContract.json";
+import { ethers } from "ethers";
+import { addresses } from "src/constants";
+import { BondCalcContract } from "../typechain";
+
+export function getBondCalculator(networkID: NetworkID, provider: StaticJsonRpcProvider) {
+  return new ethers.Contract(
+    addresses[networkID].BONDINGCALC_ADDRESS as string,
+    BondCalcContractABI,
+    provider,
+  ) as BondCalcContract;
+}
+
+export function getSpecialBondCalculator(networkID: NetworkID, provider: StaticJsonRpcProvider) {
+  return new ethers.Contract(
+    addresses[networkID].SPECIALBONDINGCALC_ADDRESS as string,
+    BondCalcContractABI,
+    provider,
+  ) as BondCalcContract;
+}
